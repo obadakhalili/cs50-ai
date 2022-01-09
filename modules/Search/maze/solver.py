@@ -9,7 +9,7 @@ def read_file(dir):
     return text
 
 
-class Stack():
+class Stack:
     def __init__(self, init_item):
         self.items = [init_item]
 
@@ -38,7 +38,7 @@ class Queue(Stack):
         return last_item
 
 
-class Maze():
+class Maze:
     class Symbol(Enum):
         WALL = "#"
         START = "A"
@@ -53,7 +53,7 @@ class Maze():
         def __init__(self):
             self.message = "maze has no solution"
 
-    class Node():
+    class Node:
         def __init__(self, state, parent):
             self.state = state
             self.parent = parent
@@ -69,7 +69,9 @@ class Maze():
         self.end_coords = None
         self.solution = None
 
-        if self.max_col == None or any(len(line) - 1 is not self.max_col for line in lines):
+        if self.max_col is None or any(
+            len(line) - 1 is not self.max_col for line in lines
+        ):
             raise self.InvalidError("invalid maze dimensions")
 
         for row, line in enumerate(lines):
@@ -107,21 +109,23 @@ class Maze():
         def expand(state):
             row, col = state
 
-            return list(filter(
-                lambda state: not (
-                    state[0] < 0 or
-                    state[0] > self.max_row or
-                    state[1] < 0 or
-                    state[1] > self.max_col or
-                    state in self.walls_coords
-                ),
-                [
-                    (row - 1, col),  # up
-                    (row + 1, col),  # down
-                    (row, col + 1),  # right
-                    (row, col - 1),  # left
-                ]
-            ))
+            return list(
+                filter(
+                    lambda state: not (
+                        state[0] < 0
+                        or state[0] > self.max_row
+                        or state[1] < 0
+                        or state[1] > self.max_col
+                        or state in self.walls_coords
+                    ),
+                    [
+                        (row - 1, col),  # up
+                        (row + 1, col),  # down
+                        (row, col + 1),  # right
+                        (row, col - 1),  # left
+                    ],
+                )
+            )
 
         frontier = Frontier(self.Node(self.start_coords, None))
         explored = set()
@@ -132,15 +136,14 @@ class Maze():
             if is_goal(node.state):
                 self.solution = {
                     "path": resolve_path(node.parent),
-                    "explored": explored
+                    "explored": explored,
                 }
                 return self.solution
 
             explored.add(node.state)
 
             for child_node in map(
-                lambda state: self.Node(state, node),
-                expand(node.state)
+                lambda state: self.Node(state, node), expand(node.state)
             ):
                 if child_node.state not in explored:
                     frontier.add(child_node)
@@ -165,20 +168,16 @@ class Maze():
             return maze
 
         path_track = reduce(
-            insert_path_symbol,
-            self.solution["path"],
-            list(self.serialized_maze)
+            insert_path_symbol, self.solution["path"], list(self.serialized_maze)
         )
 
         explored_track = reduce(
-            insert_explored_symbol,
-            self.solution["explored"],
-            path_track.copy()
+            insert_explored_symbol, self.solution["explored"], path_track.copy()
         )
 
         return {
-            "path_track": ''.join(path_track),
-            "explored_track": ''.join(explored_track),
+            "path_track": "".join(path_track),
+            "explored_track": "".join(explored_track),
         }
 
 
@@ -188,7 +187,7 @@ try:
     solution = maze.solve(Stack)
     serialized_solution = maze.serialize_solution()
 
-    print(f'Maze:\n\n{serialized_maze}\n')
+    print(f"Maze:\n\n{serialized_maze}\n")
     print(f'Path Track:\n\n{serialized_solution["path_track"]}\n')
     print(f'Explored Track:\n\n{serialized_solution["explored_track"]}\n')
     print("Explored Count:", len(solution["explored"]))

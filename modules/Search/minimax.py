@@ -2,7 +2,8 @@ from math import inf
 
 
 def minimax(state, maximizer_player, minimizer_player):
-    def is_draw(state): return len([cell for cell in state if not cell]) == 0
+    def is_draw(state):
+        return len([cell for cell in state if not cell]) == 0
 
     def player_won(state):
         def strike_through(combo):
@@ -17,7 +18,7 @@ def minimax(state, maximizer_player, minimizer_player):
             [1, 4, 7],
             [2, 5, 8],
             [0, 4, 8],
-            [2, 4, 6]
+            [2, 4, 6],
         ]
 
         return any(strike_through(combo) for combo in winning_combos)
@@ -27,7 +28,11 @@ def minimax(state, maximizer_player, minimizer_player):
             state[cellIdx] = player
             return state
 
-        return [(play_move(state.copy(), idx), idx) for idx, cell in enumerate(state) if not cell]
+        return [
+            (play_move(state.copy(), idx), idx)
+            for idx, cell in enumerate(state)
+            if not cell
+        ]
 
     def minimizer(state):
         if player_won(state):  # The agent has won
@@ -69,13 +74,15 @@ def minimax(state, maximizer_player, minimizer_player):
 
 
 move = minimax(
+    # fmt: off
     state=[
         "X", "X", "O",
         "", "O", "",
         "", "", ""
     ],
+    # fmt: on
     maximizer_player="X",
-    minimizer_player="O"
+    minimizer_player="O",
 )
 
 if move is not None:
