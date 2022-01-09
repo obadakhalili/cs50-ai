@@ -33,9 +33,9 @@ class Queue(Stack):
         if not len(self.items):
             return
 
-        last_item = self.items[0]
+        first_item = self.items[0]
         self.items = self.items[1:]
-        return last_item
+        return first_item
 
 
 class Maze:
