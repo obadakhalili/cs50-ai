@@ -168,7 +168,14 @@ class Maze:
             return maze
 
         path_track = reduce(
-            insert_path_symbol, self.solution["path"], list(self.serialized_maze)
+            insert_path_symbol,
+            self.solution["path"],
+            list(
+                map(
+                    lambda char: "\u2588" if char == self.Symbol.WALL.value else char,
+                    list(self.serialized_maze),
+                )
+            ),
         )
 
         explored_track = reduce(
