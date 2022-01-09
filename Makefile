@@ -5,7 +5,7 @@ install: requirements.txt
 	pip install -r requirements.txt
 
 format:
-	yapf --exclude .venv --recursive --in-place .
+	black --exclude .venv .
 
 lint:
 	flake8 --exclude .venv .
