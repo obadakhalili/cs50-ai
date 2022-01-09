@@ -2,9 +2,6 @@ from math import inf
 
 
 def minimax(state, maximizer_player, minimizer_player):
-    def is_draw(state):
-        return len([cell for cell in state if not cell]) == 0
-
     def player_won(state):
         def strike_through(combo):
             x, y, z = combo
@@ -23,6 +20,9 @@ def minimax(state, maximizer_player, minimizer_player):
 
         return any(strike_through(combo) for combo in winning_combos)
 
+    def no_empty_cells_left(state):
+        return len([cell for cell in state if not cell]) == 0
+
     def possible_moves(state, player):
         def play_move(state, cellIdx):
             state[cellIdx] = player
@@ -38,7 +38,7 @@ def minimax(state, maximizer_player, minimizer_player):
         if player_won(state):  # The agent has won
             return 1
 
-        if is_draw(state):
+        if no_empty_cells_left(state):
             return 0
 
         min_utility = inf
@@ -55,7 +55,7 @@ def minimax(state, maximizer_player, minimizer_player):
         if player_won(state):  # The adversary has won
             return -1, move
 
-        if is_draw(state):
+        if no_empty_cells_left(state): # It's a tie
             return 0, move
 
         max_utility = -inf
@@ -86,6 +86,6 @@ move = minimax(
 )
 
 if move is not None:
-    print(move, (move % 3 + 1, move // 3 + 1))
+    print(move, (move // 3 + 1, move % 3 + 1))
 else:
     print("No move can be made")
