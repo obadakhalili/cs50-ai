@@ -34,7 +34,12 @@ def minimax(state, maximizer_player, minimizer_player):
             if not cell
         ]
 
+    alpha = -inf
+    beta = inf
+
     def minimizer(state):
+        nonlocal alpha
+
         if player_won(state):  # The agent has won
             return 1
 
@@ -45,17 +50,25 @@ def minimax(state, maximizer_player, minimizer_player):
 
         for child_state, _ in possible_moves(state, minimizer_player):
             max_utility, _ = maximizer(child_state)
+
+            if max_utility < alpha:
+                return max_utility
+
             min_utility = min(min_utility, max_utility)
+
+        alpha = min_utility
 
         return min_utility
 
     def maximizer(state):
+        nonlocal beta
+
         move = None
 
         if player_won(state):  # The adversary has won
             return -1, move
 
-        if no_empty_cells_left(state): # It's a tie
+        if no_empty_cells_left(state):  # It's a tie
             return 0, move
 
         max_utility = -inf
@@ -63,9 +76,14 @@ def minimax(state, maximizer_player, minimizer_player):
         for child_state, action in possible_moves(state, maximizer_player):
             min_utility = minimizer(child_state)
 
+            if min_utility > beta:
+                return min_utility, action
+
             if min_utility > max_utility:
                 max_utility = min_utility
                 move = action
+
+        beta = max_utility
 
         return max_utility, move
 
@@ -76,8 +94,8 @@ def minimax(state, maximizer_player, minimizer_player):
 move = minimax(
     # fmt: off
     state=[
-        "X", "X", "O",
-        "", "O", "",
+        "", "", "",
+        "", "", "",
         "", "", ""
     ],
     # fmt: on
