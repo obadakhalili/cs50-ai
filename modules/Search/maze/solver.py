@@ -194,7 +194,6 @@ try:
     solution = maze.solve(Stack)
     serialized_solution = maze.serialize_solution()
 
-    print(f"Maze:\n\n{serialized_maze}\n")
     print(f'Path Track:\n\n{serialized_solution["path_track"]}\n')
     print(f'Explored Track:\n\n{serialized_solution["explored_track"]}\n')
     print("Explored Count:", len(solution["explored"]))
