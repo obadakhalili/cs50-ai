@@ -86,6 +86,6 @@ move = minimax(
 )
 
 if move is not None:
-    print(move, (move // 3 + 1, move % 3 + 1))
+    print(move, (move // 3, move % 3))
 else:
     print("No move can be made")
