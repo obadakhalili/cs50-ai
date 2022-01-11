@@ -1,6 +1,7 @@
 from math import inf
 
 
+# TODO: refactor this into a generic minimax function
 def minimax(state, maximizer_player, minimizer_player):
     def player_won(state):
         def strike_through(combo):

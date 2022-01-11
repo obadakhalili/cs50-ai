@@ -1,3 +1,7 @@
+# TODO: share common utils: Stack, Queue, and Node
+# TODO: abstract the search algorithm into a generic uninformed one,
+# used in maze and degrees
+
 from enum import Enum
 from functools import reduce
 
