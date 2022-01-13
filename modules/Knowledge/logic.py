@@ -9,6 +9,7 @@ class LogicalConnective:
 
     def add(self, operand):
         self.operands = (copy(self), operand)
+        return self
 
     def evaluate(self, model):
         try:
@@ -110,13 +111,9 @@ def model_checking(KB, query):
         ),
         product([False, True], repeat=len(symbols)),
     )
-    entailment = None
 
     for model in possible_models:
-        if KB.evaluate(model):
-            if entailment is None:
-                entailment = query.evaluate(model)
-            elif query.evaluate(model) is not entailment:
-                return
+        if KB.evaluate(model) and not query.evaluate(model):
+            return False
 
-    return entailment
+    return True
