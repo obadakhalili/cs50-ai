@@ -8,7 +8,10 @@ class LogicalConnective:
         self.operands = operands
 
     def add(self, operand):
-        self.operands = (copy(self), operand)
+        if len(self.operands) < 2:
+            self.operands = self.operands + (operand,)
+        else:
+            self.operands = (copy(self), operand)
         return self
 
     def evaluate(self, model):
@@ -46,6 +49,11 @@ class Self(LogicalConnective):
         except ValueError:
             raise RuntimeError(f"'{self.__class__.__name__}' should take 1 operand")
 
+    def add(self, operand):
+        if not self.operands:
+            self.operands = (operand,)
+        return self
+
 
 class Not(LogicalConnective):
     def evaluate(self, model):
@@ -54,6 +62,11 @@ class Not(LogicalConnective):
             return not P
         except ValueError:
             raise RuntimeError(f"'{self.__class__.__name__}' should take 1 operand")
+
+    def add(self, operand):
+        if not self.operands:
+            self.operands = (operand,)
+        return self
 
 
 class And(LogicalConnective):
