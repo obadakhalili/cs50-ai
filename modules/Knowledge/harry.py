@@ -12,6 +12,7 @@ if __name__ == "__main__":
         )
         KB.add(R)
 
-        print(model_checking(KB, Self(P)))
+        if model_checking(KB, Self(P)):
+            print(P)
     except RuntimeError as e:
         print(e)
