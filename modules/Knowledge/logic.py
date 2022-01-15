@@ -96,7 +96,7 @@ class XOr(LogicalConnective):
             raise RuntimeError(f"'{self.__class__.__name__}' should take 2 operands")
 
 
-class Implification(LogicalConnective):
+class Implication(LogicalConnective):
     def evaluate(self, model):
         try:
             [P, Q] = super().evaluate(model)
@@ -105,7 +105,7 @@ class Implification(LogicalConnective):
             raise RuntimeError(f"'{self.__class__.__name__}' should take 2 operands")
 
 
-class BiImplification(LogicalConnective):
+class BiImplication(LogicalConnective):
     def evaluate(self, model):
         try:
             [P, Q] = super().evaluate(model)

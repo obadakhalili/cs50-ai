@@ -1,4 +1,4 @@
-from logic import Self, Not, And, XOr, Implification, model_checking
+from logic import Self, Not, And, XOr, Implication, model_checking
 
 if __name__ == "__main__":
     try:
@@ -7,7 +7,7 @@ if __name__ == "__main__":
         R = "Harry visited Dumbledore"
 
         KB = And(
-            Implification(Not(P), Q),
+            Implication(Not(P), Q),
             XOr(Q, R),
         )
         KB.add(R)

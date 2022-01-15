@@ -1,4 +1,4 @@
-from logic import Self, Not, And, Or, XOr, Implification, model_checking
+from logic import Self, Not, And, Or, XOr, Implication, model_checking
 
 
 def format_character_in_house(character, house):
@@ -23,7 +23,7 @@ if __name__ == "__main__":
             for house in houses:
                 one_house_per_char.add(format_character_in_house(character_i, house))
 
-                one_char_per_house = Implification(
+                one_char_per_house = Implication(
                     format_character_in_house(character_i, house)
                 )
                 chars_not_in_house = And()

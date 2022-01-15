@@ -1,4 +1,4 @@
-from logic import Self, Not, And, Or, XOr, Implification, model_checking
+from logic import Self, Not, And, Or, XOr, Implication, model_checking
 
 
 def format_color_at_position(color, position):
@@ -17,7 +17,7 @@ if __name__ == "__main__":
             for position in range(len(colors)):
                 one_position_per_color.add(format_color_at_position(color_i, position))
 
-                one_color_per_position = Implification(
+                one_color_per_position = Implication(
                     format_color_at_position(color_i, position)
                 )
                 colors_not_in_position = And()
