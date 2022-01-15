@@ -7,13 +7,6 @@ class LogicalConnective:
     def __init__(self, *operands):
         self.operands = operands
 
-    def add(self, operand):
-        if len(self.operands) < 2:
-            self.operands = self.operands + (operand,)
-        else:
-            self.operands = (copy(self), operand)
-        return self
-
     def evaluate(self, model):
         try:
             return [
@@ -41,7 +34,23 @@ class LogicalConnective:
         return symbols
 
 
-class Self(LogicalConnective):
+class UnaryLogicalConnective(LogicalConnective):
+    def add(self, operand):
+        if not self.operands:
+            self.operands = (operand,)
+        return self
+
+
+class BinaryLogicalConnective(LogicalConnective):
+    def add(self, operand):
+        if len(self.operands) < 2:
+            self.operands = self.operands + (operand,)
+        else:
+            self.operands = (copy(self), operand)
+        return self
+
+
+class Self(UnaryLogicalConnective):
     def evaluate(self, model):
         try:
             [P] = super().evaluate(model)
@@ -49,13 +58,8 @@ class Self(LogicalConnective):
         except ValueError:
             raise RuntimeError(f"'{self.__class__.__name__}' should take 1 operand")
 
-    def add(self, operand):
-        if not self.operands:
-            self.operands = (operand,)
-        return self
 
-
-class Not(LogicalConnective):
+class Not(UnaryLogicalConnective):
     def evaluate(self, model):
         try:
             [P] = super().evaluate(model)
@@ -69,7 +73,7 @@ class Not(LogicalConnective):
         return self
 
 
-class And(LogicalConnective):
+class And(BinaryLogicalConnective):
     def evaluate(self, model):
         try:
             [P, Q] = super().evaluate(model)
@@ -78,7 +82,7 @@ class And(LogicalConnective):
             raise RuntimeError(f"'{self.__class__.__name__}' should take 2 operands")
 
 
-class Or(LogicalConnective):
+class Or(BinaryLogicalConnective):
     def evaluate(self, model):
         try:
             [P, Q] = super().evaluate(model)
@@ -87,7 +91,7 @@ class Or(LogicalConnective):
             raise RuntimeError(f"'{self.__class__.__name__}' should take 2 operands")
 
 
-class XOr(LogicalConnective):
+class XOr(BinaryLogicalConnective):
     def evaluate(self, model):
         try:
             [P, Q] = super().evaluate(model)
@@ -96,7 +100,7 @@ class XOr(LogicalConnective):
             raise RuntimeError(f"'{self.__class__.__name__}' should take 2 operands")
 
 
-class Implication(LogicalConnective):
+class Implication(BinaryLogicalConnective):
     def evaluate(self, model):
         try:
             [P, Q] = super().evaluate(model)
@@ -105,7 +109,7 @@ class Implication(LogicalConnective):
             raise RuntimeError(f"'{self.__class__.__name__}' should take 2 operands")
 
 
-class BiImplication(LogicalConnective):
+class BiImplication(BinaryLogicalConnective):
     def evaluate(self, model):
         try:
             [P, Q] = super().evaluate(model)
