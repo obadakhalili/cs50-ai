@@ -132,7 +132,6 @@ if __name__ == "__main__":
 
     actors_info, movies_info = IMDb
     actors_path = BFS(
-        # TODO: generate actors ids from their names as input
         "102",
         "144",
         lambda current_actor_id: [
