@@ -3,3 +3,5 @@ __pycache__
 todo.md
 
 modules/Search/degrees/IMDb/large
+
+.vscode
