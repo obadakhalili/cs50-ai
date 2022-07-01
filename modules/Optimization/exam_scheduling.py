@@ -12,7 +12,8 @@ class ExamSchedulingCSP:
             "F",
             "G",
         ]
-        # The procedures for maintaining node- and arc-consistency is performed on the following data sturcture
+        # The procedures for maintaining node- and arc-consistency is performed on
+        # the following data sturcture
         self.courses_slots = {
             "A": ["Mon", "Tue", "Wed"],
             "B": ["Mon", "Tue", "Wed"],
