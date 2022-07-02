@@ -33,7 +33,7 @@ class ExamSchedulingCSP:
             "G": ["F", "E"],
         }
 
-    def get_domain_of_var(self, var):
+    def get_var_domain(self, var):
         return self.courses_slots[var]
 
     def is_assignment_consistent(self, var, value, assignments):

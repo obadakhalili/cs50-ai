@@ -12,7 +12,7 @@ def backtrack(csp, assignments={}):
 
     var = unassigned_vars.pop()
 
-    for value in csp.get_domain_of_var(var):
+    for value in csp.get_var_domain(var):
         if csp.is_assignment_consistent(var, value, assignments):
             assignments[var] = value
             try:
