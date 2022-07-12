@@ -4,7 +4,6 @@ flake8==4.0.1
 ipykernel==6.15.1
 matplotlib==3.5.2
 pandas==1.4.3
-pip-chill==1.0.1
 scikit-learn==1.1.1
 termcolor==1.1.0
 tokenize-rt==4.2.1
