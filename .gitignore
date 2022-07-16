@@ -3,5 +3,6 @@ __pycache__
 todo.md
 
 modules/Search/degrees/IMDb/large
+modules/NN/traffic/gtsrb.zip
 
 .vscode
