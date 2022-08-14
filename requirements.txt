@@ -1,9 +1,8 @@
-black==21.12b0
+black==22.6.0
+bnlearn==0.7.6
 category-encoders==2.5.0
-flake8==4.0.1
-ipykernel==6.15.1
-matplotlib==3.5.2
-pandas==1.4.3
-scikit-learn==1.1.1
-termcolor==1.1.0
+flake8==5.0.4
+pipdeptree==2.2.1
+pkg-resources==0.0.0
+tensorflow==2.9.1
 tokenize-rt==4.2.1
