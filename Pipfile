@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+black = {extras = ["jupyter"], version = "*"}
+category-encoders = "*"
+flake8 = "*"
+ipykernel = "*"
+matplotlib = "*"
+pandas = "*"
+scikit-learn = "*"
+termcolor = "*"
+bnlearn = "*"
+numpy = "*"
+tensorflow = "*"
+pillow = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

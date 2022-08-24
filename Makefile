@@ -1,11 +1,5 @@
-freeze:
-	touch requirements.txt && pipdeptree --warn silence | grep -E '^\w+' > requirements.txt
-
-freeze-lock:
-	touch requirements-lock.txt && pipdeptree > requirements-lock.txt
-
-install: requirements.txt
-	pip install -r requirements.txt
+install:
+	pipenv install
 
 format:
 	black --exclude .venv .
