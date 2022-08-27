@@ -16,6 +16,7 @@ bnlearn = "*"
 numpy = "*"
 tensorflow = "*"
 pillow = "*"
+nltk = "*"
 
 [dev-packages]
 
