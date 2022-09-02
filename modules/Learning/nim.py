@@ -84,14 +84,14 @@ class Nim:
         ]
         player_turn = int(
             input(
-                f"Enter the code for the player which will go first, {players_names[0]} (0) or {players_names[1]} (1): "
+                f"Enter the code for the player which will go first, {players_names[0]} (0) or {players_names[1]} (1): "  # noqa
             )
         )
 
         while not self.is_game_over(self.piles):
             for pile, objects in enumerate(reversed(self.piles)):
                 print(
-                    f"Pile {len(self.piles) - pile - 1}: {objects}    {termcolor.colored(objects * '*', 'blue')}"
+                    f"Pile {len(self.piles) - pile - 1}: {objects}    {termcolor.colored(objects * '*', 'blue')}"  # noqa
                 )
 
             next_move = (
@@ -122,7 +122,8 @@ def q_learning(world, episodes_count, epsilon=0.2, alpha=0.5, gamma=0.5):
         for state in world.get_all_states()
     }
 
-    get_best_action = lambda state: max(Q[state], key=Q[state].get)
+    def get_best_action(state):
+        return max(Q[state], key=Q[state].get)
 
     for _ in range(episodes_count):
         current_state = random.choice(list(Q.keys()))
